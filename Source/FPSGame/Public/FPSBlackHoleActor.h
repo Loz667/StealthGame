@@ -22,10 +22,18 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* MeshComp;
 
+	//The inner sphere will destroy the overlapping components
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	USphereComponent* SphereComp;
+	USphereComponent* InnerSphereComp;
 
-	// Called when the game starts or when spawned
+	//The outer sphere will pull the components towards the inner sphere
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USphereComponent* OuterSphereComp;
+
+	//Marked as function to bind with overlap event
+	UFUNCTION()
+	void OverlapInnerSphere(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	virtual void BeginPlay() override;
 
 public:	
